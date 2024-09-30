@@ -19,6 +19,14 @@ class _TopFiveScreenState extends State<TopFiveScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.blue,
+          foregroundColor: Colors.white,
+          onPressed: () {
+            Navigator.pushNamed(context, '/profile');
+          },
+          child: Icon(Icons.person)),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       appBar: AppBar(
         title: Text('Top Five Items'),
       ),

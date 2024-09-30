@@ -29,11 +29,14 @@ class ReservationListScreen extends StatelessWidget {
         },
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.blue,
+        foregroundColor: Colors.white,
         onPressed: () {
-          Navigator.pushNamed(context, '/profile');
+          Navigator.pushNamed(context, '/top');
         },
-        child: Icon(Icons.person) 
+        child: Icon(Icons.list),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }

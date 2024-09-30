@@ -1,4 +1,4 @@
-import 'package:empty/modules/home/screens/home.dart';
+import 'package:empty/navigation/home.dart';
 import 'package:empty/modules/home/screens/splash_screen.dart';
 import 'package:empty/modules/profile/screens/profile.dart';
 import 'package:empty/modules/reservations/screens/list';
