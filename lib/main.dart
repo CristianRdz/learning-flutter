@@ -1,4 +1,8 @@
-import 'package:empty/widgets/splash_screen.dart';
+import 'package:empty/modules/home/screens/home.dart';
+import 'package:empty/modules/home/screens/splash_screen.dart';
+import 'package:empty/modules/profile/screens/profile.dart';
+import 'package:empty/modules/reservations/screens/list';
+import 'package:empty/modules/top/screens/list.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,7 +16,14 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const SplashScreen(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const SplashScreen(),
+        '/home': (context) => const Home(),
+        '/top': (context) => const TopFiveScreen(),
+        '/reservations': (context) => const ReservationListScreen(),
+        '/profile': (context) => const Profile(),
+      },
     );
   }
 }
