@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginTrue extends StatefulWidget {
   const LoginTrue({super.key});
@@ -11,6 +12,7 @@ class _LoginTrueState extends State<LoginTrue> {
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
   bool _obscureText = true;
+  bool _loading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -54,22 +56,41 @@ class _LoginTrueState extends State<LoginTrue> {
                 controller: _password,
                 obscureText: _obscureText,
               ),
+              const SizedBox(height: 16),
               SizedBox(
                 width: double.infinity,
                 height: 48,
                 child: ElevatedButton(
-                  
                   style: OutlinedButton.styleFrom(
                     foregroundColor: Colors.white,
-                    
                     backgroundColor: Colors.blue,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16),
                     ),
-                  ),  
-                  onPressed: () {
-                    print('Email: ${_email.text}');
-                    print('Password: ${_password.text}');
+                  ),
+                  onPressed: () async {
+                    try {
+                      setState(() {
+                        _loading = true;
+                      });
+                      final credential = await FirebaseAuth.instance
+                          .signInWithEmailAndPassword(
+                        email: _email.text,
+                        password: _password.text,
+                      );
+                      setState(() {
+                        _loading = false;
+                      });
+                      print(credential.user ?? 'No user');
+                    } on FirebaseAuthException catch (e) {
+                      if (e.code == 'user-not-found') {
+                        print('No user found for that email.');
+                      } else if (e.code == 'wrong-password') {
+                        print('Wrong password provided for that user.');
+                      } else {
+                        print(e.code);
+                      }
+                    }
                   },
                   child: const Text('Iniciar sesión'),
                 ),

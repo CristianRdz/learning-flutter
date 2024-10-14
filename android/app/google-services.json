@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "723271946889",
+    "project_id": "restaurante-crr",
+    "storage_bucket": "restaurante-crr.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:723271946889:android:c5fe332cffc4daa4e2ac58",
+        "android_client_info": {
+          "package_name": "com.example.empty"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmfpRRJ3mGK5k6vtoASEelVFQkqnJwpXw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:723271946889:android:79d98d13ee9c4656e2ac58",
+        "android_client_info": {
+          "package_name": "com.example.finanzas_flutter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmfpRRJ3mGK5k6vtoASEelVFQkqnJwpXw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

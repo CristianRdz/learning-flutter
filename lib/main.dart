@@ -7,8 +7,14 @@ import 'package:empty/modules/profile/screens/profile.dart';
 import 'package:empty/modules/reservations/screens/list';
 import 'package:empty/modules/top/screens/list.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MainApp());
 }
 

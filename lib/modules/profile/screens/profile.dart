@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Profile extends StatelessWidget {
   const Profile({Key? key}) : super(key: key);
@@ -49,7 +50,11 @@ class Profile extends StatelessWidget {
                     leading: Icon(Icons.logout),
                     title: Text('Logout'),
                     onTap: () {
-                      // Handle logout tap
+                      try {
+                        FirebaseAuth.instance.signOut();
+                      } catch (e) {
+                        print(e);
+                      }
                     },
                   ),
                 ],
