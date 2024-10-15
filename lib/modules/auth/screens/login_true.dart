@@ -95,6 +95,21 @@ class _LoginTrueState extends State<LoginTrue> {
                   child: const Text('Iniciar sesión'),
                 ),
               ),
+              const SizedBox(height: 8),
+              InkWell(
+                onTap: () {
+                  Navigator.pushNamed(context, '/register');
+                },
+                child: const Text(
+                  'Registrarse',
+                  style: TextStyle(
+                    color: Colors.blue,
+                    decoration: TextDecoration.underline,
+                    decorationColor: Colors.blue,
+                    fontSize: 16,
+                  ),
+                ),
+              ),
             ],
           ),
         ),

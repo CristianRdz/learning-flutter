@@ -1,5 +1,6 @@
 import 'package:empty/modules/auth/screens/login_true.dart';
 import 'package:empty/modules/auth/screens/login.dart';
+import 'package:empty/modules/auth/screens/register.dart';
 import 'package:empty/navigation/home.dart';
 import 'package:empty/navigation/navigation.dart';
 import 'package:empty/modules/home/screens/splash_screen.dart';
@@ -29,6 +30,7 @@ class MainApp extends StatelessWidget {
       routes: {
         '/': (context) => const SplashScreen(),
         '/menu': (context) => const Navigation(),
+        '/register': (context) => const Register(),
         '/login': (context) => const LoginTrue(),
         '/home': (context) => const Home(),
         '/top': (context) => const TopFiveScreen(),
