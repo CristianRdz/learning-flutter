@@ -5,7 +5,7 @@ import 'package:empty/navigation/home.dart';
 import 'package:empty/navigation/navigation.dart';
 import 'package:empty/modules/home/screens/splash_screen.dart';
 import 'package:empty/modules/profile/screens/profile.dart';
-import 'package:empty/modules/reservations/screens/list';
+import 'package:empty/modules/reservations/screens/list.dart';
 import 'package:empty/modules/top/screens/list.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';

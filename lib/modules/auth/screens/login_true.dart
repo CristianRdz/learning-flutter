@@ -14,6 +14,12 @@ class _LoginTrueState extends State<LoginTrue> {
   bool _obscureText = true;
   bool _loading = false;
 
+  void _showSnackBar(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(message)),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,13 +87,20 @@ class _LoginTrueState extends State<LoginTrue> {
                       setState(() {
                         _loading = false;
                       });
+                      _showSnackBar('Inicio de sesión exitoso');
                       print(credential.user ?? 'No user');
                     } on FirebaseAuthException catch (e) {
+                      setState(() {
+                        _loading = false;
+                      });
                       if (e.code == 'user-not-found') {
+                        _showSnackBar('No user found for that email.');
                         print('No user found for that email.');
                       } else if (e.code == 'wrong-password') {
+                        _showSnackBar('Wrong password provided for that user.');
                         print('Wrong password provided for that user.');
                       } else {
+                        _showSnackBar('Error: ${e.code}');
                         print(e.code);
                       }
                     }

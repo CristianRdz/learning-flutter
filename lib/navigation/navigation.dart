@@ -1,5 +1,5 @@
 import 'package:empty/modules/profile/screens/profile.dart';
-import 'package:empty/modules/reservations/screens/list';
+import 'package:empty/modules/reservations/screens/list.dart';
 import 'package:empty/modules/top/screens/list.dart';
 import 'package:empty/navigation/home.dart';
 import 'package:flutter/material.dart';

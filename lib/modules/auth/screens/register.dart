@@ -1,4 +1,5 @@
 import 'package:empty/kernel/widgets/text_form_field_password.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Register extends StatefulWidget {
@@ -13,8 +14,6 @@ class _RegisterState extends State<Register> {
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
   final TextEditingController _confirmPassword = TextEditingController();
-  bool _obscureText = true;
-  bool _obscureTextConfirm = true;
 
   @override
   Widget build(BuildContext context) {
@@ -91,9 +90,31 @@ class _RegisterState extends State<Register> {
                           borderRadius: BorderRadius.circular(16),
                         ),
                       ),
-                      onPressed: () {
+                      onPressed: () async {
                         if (_formKey.currentState!.validate()) {
-                          // register user in Firebase
+                          try {
+                            final credential = await FirebaseAuth.instance
+                                .createUserWithEmailAndPassword(
+                              email: _email.text,
+                              password: _password.text,
+                            );
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('Registro exitoso')),
+                            );
+                          } on FirebaseAuthException catch (e) {
+                            String message;
+                            if (e.code == 'user-not-found') {
+                              message = 'No user found for that email.';
+                            } else if (e.code == 'wrong-password') {
+                              message =
+                                  'Wrong password provided for that user.';
+                            } else {
+                              message = e.code;
+                            }
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text(message)),
+                            );
+                          }
                         }
                       },
                       child: const Text('Registrarse'),
