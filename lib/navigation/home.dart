@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:empty/modules/home/entities/restaurant.dart';
 import 'package:empty/modules/home/screens/content_column.dart';
+import 'package:empty/modules/widgets/details_restaurant.dart';
+import 'package:empty/modules/widgets/list_restaurant_data.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -23,20 +25,21 @@ class _HomeState extends State<Home> {
 
   Future<void> _fetchRestaurants() async {
     try {
-      final data = await db.collection('restaurants').get();
-      final fetchedRestaurants = data.docs.map((element) {
-        return Restaurant(
-          element['name'],
-          element['description'],
-          List<String>.from(element['images']),
-          element['rating'],
-          element['count'],
-        );
-      }).toList();
-
-      setState(() {
-        restaurants = fetchedRestaurants;
-        isLoading = false;
+      db.collection('restaurants').snapshots().listen((snapshot) {
+        final fetchedRestaurants = snapshot.docs.map((doc) {
+          return Restaurant(
+            doc['name'],
+            doc['description'],
+            List<String>.from(doc['images']),
+            doc['rating'],
+            doc['count'],
+          );
+        }).toList();
+        restaurants.clear();
+        setState(() {
+          restaurants = fetchedRestaurants;
+          isLoading = false;
+        });
       });
     } catch (e) {
       // Handle errors here
@@ -64,37 +67,25 @@ class _HomeState extends State<Home> {
         child: const Icon(Icons.star_rate),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-      body: Row(
-        children: [
-          Image.network(
-            restaurants[0].images[0],
-            width: 50,
-            height: 50,
-            fit: BoxFit.cover,
-          ),
-          Column(
-            children: [
-              SizedBox(width: 16),
-              Text(
-                restaurants[0].name,
-                style: const TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,
-                ),
+      body: Padding(
+        padding: const EdgeInsets.all(8),
+        child: Column(
+          children: [
+            for (var restaurant in restaurants)
+              InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          DetailsRestaurant(restaurant: restaurant),
+                    ),
+                  );
+                },
+                child: ListRestaurantData(restaurant: restaurant),
               ),
-              SizedBox(
-                height: 16,
-                child: Text(
-                  restaurants[0].description,
-                  style: const TextStyle(
-                    fontSize: 12,
-                    color: Colors.grey,
-                  ),
-                ),
-              )
-            ],
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
